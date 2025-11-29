@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Love ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial;
+        background: black;
+    }
+
+    /* LOADING SCREEN */
+    #loading {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        color: white;
+        font-size: 40px;
+        animation: fadeOut 2s forwards 2s;
+    }
+
+    @keyframes fadeOut {
+        to { opacity: 0; pointer-events: none; }
+    }
+
+    /* PAGE WRAPPER */
+    .page {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        color: white;
+        text-align: center;
+        padding-top: 120px;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in-out;
+        border: 10px solid rgba(255,255,255,0.5);
+        border-radius: 20px;
+        box-sizing: border-box;
+    }
+
+    .active {
+        transform: translateX(0%);
+    }
+
+    .leftOut {
+        transform: translateX(-100%);
+    }
+
+    /* Buttons */
+    .nav-btn {
+        margin-top: 40px;
+        padding: 15px 35px;
+        background: rgba(255,0,80,0.9);
+        border: none;
+        border-radius: 12px;
+        font-size: 20px;
+        color: white;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    /* PAGE 1 */
+    #page1 { background: pink; font-size: 34px; }
+
+    /* PAGE 2 */
+    #page2 { background: linear-gradient(to bottom, #ff8fb1, #ff4d79); }
+
+    .big-heart {
+        font-size: 120px;
+        animation: beat 1s infinite;
+    }
+
+    @keyframes beat {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.4); }
+        100% { transform: scale(1); }
+    }
+
+    /* Typing */
+    .typing {
+        font-size: 26px;
+        border-right: 3px solid white;
+        width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 20px auto;
+        animation: typing 5s steps(40) forwards, blink .7s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 380px; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+    /* Falling Hearts */
+    .heart {
+        position: absolute;
+        top: -10px;
+        color: red;
+        font-size: 24px;
+        animation: fall 4s linear infinite;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-10px); opacity: 1; }
+        100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Sparkle Effect */
+    .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: white;
+        border-radius: 50%;
+        animation: sparkle 2s infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes sparkle {
+        0%,100% { transform: scale(1); opacity: .4; }
+        50% { transform: scale(1.5); opacity: 1; }
+    }
+
+    /* Fireflies */
+    .firefly {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: yellow;
+        border-radius: 50%;
+        animation: fly 6s infinite alternate;
+    }
+
+    @keyframes fly {
+        from { transform: translate(-20px, 20px); }
+        to { transform: translate(40px, -30px); }
+    }
+
+    /* PAGE 3 */
+    #page3 { background: linear-gradient(to top, #ff4d79, #ff8fb1); font-size: 28px; }
+
+    .thank-heart {
+        font-size: 80px;
+        animation: beat 1.2s infinite;
+    }
+
+    .love-msg {
+        width: 80%;
+        margin: auto;
+        font-size: 22px;
+        margin-top: 20px;
+        line-height: 1.6;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loading">❤️</div>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+    <h1>I Love You Pritika Kafle ❤️</h1>
+    <button class="nav-btn" onclick="goPage(2)">Next →</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <div class="big-heart">❤️</div>
+    <h1 style="font-size: 32px;">Pukar Sulu ❤️ Pritika Kafle</h1>
+    <div class="typing">You are the love of my life ❤️</div>
+
+    <button class="nav-btn" onclick="goPage(1)">← Previous</button>
+    <button class="nav-btn" onclick="goPage(3)">Next →</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+    <h1>Thank You For Coming Into My Life ❤️</h1>
+    <div class="thank-heart">💖</div>
+
+    <p class="love-msg">
+        You entered my life like a soft breeze…  
+        You touched my heart like a warm light…  
+        You made my world beautiful just by being in it.  
+        I love you endlessly, Pritika ❤️
+    </p>
+
+    <button class="nav-btn" onclick="goPage(2)">← Previous</button>
+</div>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+    <source src="https://filesamples.com/samples/audio/mp3/sample3.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let current = 1;
+
+function goPage(p) {
+    document.getElementById("page" + current).classList.remove("active");
+
+    if (p < current) {
+        document.getElementById("page" + current).classList.add("leftOut");
+    } else {
+        document.getElementById("page" + current).classList.remove("leftOut");
+    }
+
+    current = p;
+    document.getElementById("page" + p).classList.add("active");
+}
+
+/* Falling hearts for Page 2 */
+setInterval(() => {
+    if (document.getElementById("page2").classList.contains("active")) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = (20 + Math.random() * 20) + "px";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+}, 300);
+
+/* Sparkles */
+for (let i = 0; i < 25; i++) {
+    const s = document.createElement("div");
+    s.classList.add("sparkle");
+    s.style.top = Math.random() * 100 + "%";
+    s.style.left = Math.random() * 100 + "%";
+    document.body.appendChild(s);
+}
+
+/* Fireflies */
+for (let i = 0; i < 10; i++) {
+    const f = document.createElement("div");
+    f.classList.add("firefly");
+    f.style.top = Math.random() * 100 + "%";
+    f.style.left = Math.random() * 100 + "%";
+    document.body.appendChild(f);
+}
+</script>
+
+</body>
+</html>
